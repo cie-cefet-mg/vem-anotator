@@ -4,23 +4,66 @@ Anotator is a Django project for organizing annotation batches of language-model
 
 ## License
 
-This project is **non-commercial**. It cannot be used for commercial purposes. See [LICENSE.md](LICENSE.md) for the full license terms.
+This project is licensed under **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**. The full legal text is in [LICENSE.md](LICENSE.md); the summary below is for convenience only and is not a substitute for the license itself.
+
+Under this license you are free to **share** (copy and redistribute the material) and **adapt** (remix, transform, and build upon the material), as long as you follow these terms:
+
+- **Attribution** — You must give appropriate credit to the original author(s), provide a link to the license, and indicate if changes were made.
+- **NonCommercial** — You may **not** use the material for commercial purposes, i.e., not primarily intended for or directed towards commercial advantage or monetary compensation.
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the **same license** as the original (CC BY-NC-SA 4.0 or a compatible one).
+- **No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+There are no warranties given: the material is provided "as-is", and the licensor disclaims liability for any damages arising from its use. This does not affect any rights you may have under fair use, fair dealing, or applicable exceptions and limitations to copyright.
 
 ## Repository Structure
 
-The Django project now lives at the repository root for a cleaner submission layout.
+The Django project lives at the repository root for a cleaner submission layout.
 
-- [manage.py](manage.py) is the main Django entry point.
-- [annotation/](annotation/) contains the project settings, URL configuration, ASGI entry point, and WSGI entry point.
-- [app_projeto/](app_projeto/) contains the application code.
-- [app_projeto/models/](app_projeto/models/) defines the core domain models, including projects, annotators, questions, answers, batches, and methods.
-- [app_projeto/views/](app_projeto/views/) contains the application views.
-- [app_projeto/templates/](app_projeto/templates/) contains the HTML templates.
-- [app_projeto/static/](app_projeto/static/) contains static assets such as CSS.
-- [app_projeto/management/commands/](app_projeto/management/commands/) contains the custom Django management commands.
-- [app_projeto/management/data/](app_projeto/management/data/) is the default output folder for generated CSV files.
+```
+.
+├── manage.py                              # Django entry point (runserver, migrate, custom commands, etc.)
+├── requirements.txt                        # Python dependencies
+├── LICENSE.md                              # Full CC BY-NC-SA 4.0 license text
+├── annotation/                             # Django project configuration package
+│   ├── settings.py                         #   Global settings (apps, database, middleware, etc.)
+│   ├── urls.py                             #   Root URL routing
+│   ├── asgi.py / wsgi.py                   #   ASGI/WSGI entry points for deployment
+│   └── __init__.py
+└── app_projeto/                            # Main Django application ("app_projeto")
+    ├── models/                             # Domain models: projects, annotators, questions, answers, batches
+    │   ├── question_answer.py              #   Question and Answer models
+    │   └── annotation_batches.py           #   AnnotationBatch and related models
+    ├── views/                              # Request handlers
+    │   ├── views.py                        #   Main application views (home, batches, answers)
+    │   └── site_access.py                  #   Login / site access control views
+    ├── templates/                          # HTML templates rendered by the views
+    │   ├── base.html                       #   Shared layout used by other templates
+    │   ├── home.html                       #   Landing page
+    │   ├── batch-detail.html               #   Batch detail / annotation screen
+    │   ├── avaliation.html                 #   Answer evaluation form
+    │   ├── divergences.html                #   View for annotator disagreements
+    │   └── site_access_login.html          #   Login page
+    ├── static/                             # Static assets
+    │   └── style.css                       #   Site styling
+    ├── management/
+    │   ├── commands/                       # Custom `python manage.py <command>` scripts
+    │   │   ├── generate_sample_questions.py       #   Generates sample question+answer CSV
+    │   │   ├── generate_sample_questions_only.py  #   Generates sample question-only CSV
+    │   │   ├── import_answers.py                  #   Imports a CSV of answers into the database
+    │   │   └── create_annotation_batch.py         #   Creates annotation batches for annotators
+    │   └── data/                           # Default output folder for generated/sample CSV files
+    ├── migrations/                         # Django database migration history
+    ├── admin.py                            # Django admin site registration
+    ├── forms.py                            # Django forms used by the views
+    ├── managers.py                         # Custom model managers/querysets
+    ├── middleware.py                       # Custom request/response middleware
+    ├── services.py                         # Business logic shared across views/commands
+    ├── context_processors.py               # Template context processors
+    ├── urls.py                             # App-level URL routing
+    └── tests.py                            # Automated tests
+```
+
 - [.gitignore](.gitignore) defines ignored files and folders.
-- [requirements.txt](requirements.txt) lists the Python dependencies.
 
 ## Workflow Overview
 
