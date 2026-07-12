@@ -1,0 +1,33 @@
+# Ambiente virtual (nunca versionar)
+venv/
+.venv/
+env/
+
+# Bytecode Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Banco local (cada máquina / servidor tem o seu)
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+
+# Django coletado em produção
+staticfiles/
+media/
+
+# Variáveis de ambiente (senhas, chaves)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# IDE / SO
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

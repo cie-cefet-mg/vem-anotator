@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Divergences - Batch {{ batch.id }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Batch Divergences #{{ batch.id }}</h1>
+            <p class="text-muted">Project: <strong>{{ batch.project.name }}</strong></p>
+            
+            {% if divergences %}
+                <p class="alert alert-warning">
+                    <strong>Total divergences found:</strong> {{ divergences|length }}
+                </p>
+
+                {% for divergence in divergences %}
+                    <div class="card-header bg-danger text-white">
+                        <h3>Divergence #{{ forloop.counter }}</h3>
+                    </div>
+                    <section class="card shadow-sm mb-3">
+
+                        <div class="card-body p-4">
+                            <!-- Question -->
+                            <div class="mb-4">
+                                <h3 class="text-muted">QUESTION:</h3>
+                                <p class="card-text">
+                                    {{ divergence.question.text }}
+                                </p>
+                            </div>
+                        </section>
+                        <!-- Answer -->
+                         <section class="card shadow-sm mb-3">
+                             <div class="mb-4">
+                                 <h3 class="text-muted">ANSWER:</h3>
+                                 <div class="alert alert-light border">
+                                     <p>
+                                         {{ divergence.answer.content }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+
+                        <!-- Labels per annotator -->
+                          <section class="card shadow-sm mb-3">
+                            
+                              
+                              <div class="mb-3">
+                            <h3 class="text-muted mb-3">ANNOTATOR EVALUATIONS:</h3>
+                            
+                            {% for annotator_id, annotator_info in divergence.annotator_labels.items %}
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <strong>{{ annotator_info.annotator_name }}</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    {% if annotator_info.labels %}
+                                    <span class="badge bg-info">
+                                        Selected labels:
+                                    </span>
+                                    {% for label in annotator_info.labels %}
+                                    <span class="badge bg-info">
+                                        {{ label.name }}
+                                    </span>
+                                    {% empty %}
+                                        <span class="text-muted">No labels selected</span>
+                                    {% endfor %}
+                                    {% else %}
+                                    <span class="text-muted">No labels selected</span>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            <div>
+                                <a href="{% url 'app_projeto:evaluation_en' batch.id annotator_id %}?annotation_id={{ annotator_info.annotation_id }}" class="btn-voltar">    Edit form for {{annotator_info.annotator_name}}
+                                </a>
+                            </div>
+                                
+                            {% endfor %}
+                        </section>
+                        </div>
+                    </div>
+
+
+                {% endfor %}
+
+            {% else %}
+                <div class="alert alert-success">
+                    <strong>✓ Great!</strong> No divergences were found in this batch.
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<!-- Back button -->
+    <a href="{% url 'app_projeto:home' %}" class="btn-voltar">
+        ← Back to home
+    </a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div style="max-width: 1200px; margin: 40px auto;">
+    <h1 style="margin-bottom: 30px; color: #333;">Batches</h1>
+    
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'app_projeto:export_annotations_en' %}" class="btn-voltar" style="padding: 10px 20px; text-decoration: none;">
+            Export All Annotations (CSV)
+        </a>
+    </div>
+    
+    {% if batches %}
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 24px;">
+        {% for batch in batches %}
+            <div class="card">
+                <h3 style="color: #667eea; margin-top: 0;">Batch #{{ batch.id }}</h3>
+                
+                <p><strong>Project:</strong> {{ batch.project.name }}</p>
+                <p><strong>Answers:</strong> {{ batch.answers.count }}</p>
+                
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <a href="{% url 'app_projeto:batch_detail_en' batch.id %}" class="btn-voltar" style="flex: 1; text-align: center;">
+                        Details
+                    </a>
+                    <a href="{% url 'app_projeto:divergences_en' batch.id %}" class="btn-voltar" style="flex: 1; text-align: center;">
+                        Divergences
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <div style="background-color: #e3f2fd; border-left: 4px solid #667eea; padding: 20px; border-radius: 4px;">
+            <strong style="color: #667eea;">No batches found.</strong> Create a new batch to get started.
+        </div>    
+    {% endif %}
+        
+
+</div>
+{% endblock %}

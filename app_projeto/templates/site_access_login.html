@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Annotator Access{% endblock %}
+
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #0f172a;
+        background-image:
+            radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+            radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+            radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 420px;
+        padding: 24px;
+        z-index: 10;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-card h1 {
+        margin: 0 0 12px;
+        color: #f8fafc;
+        font-size: 1.75rem;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: -0.025em;
+    }
+
+    .glass-card p {
+        margin: 0 0 32px;
+        color: #94a3b8;
+        font-size: 0.95rem;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #cbd5e1;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .input-group input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 14px 16px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: #f8fafc;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .input-group input:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        margin-top: 8px;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+    }
+
+    .messages {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+    }
+
+    .message-item {
+        background: rgba(239, 68, 68, 0.1);
+        color: #fca5a5;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+</style>
+
+<div class="login-container">
+    <div class="glass-card">
+        <h1>Annotator</h1>
+        <p>VUEI | CEFET-MG</p>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="message-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="post" action="{% url 'app_projeto:site_access_login_en' %}">
+            {% csrf_token %}
+            {% if next_url %}
+            <input type="hidden" name="next" value="{{ next_url }}">
+            {% endif %}
+
+            {% if site_access_expects_username %}
+            <div class="input-group">
+                <label>Username</label>
+                <input name="username" autocomplete="username" placeholder="Enter your username" required>
+            </div>
+            {% endif %}
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" autocomplete="current-password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Sign in
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
