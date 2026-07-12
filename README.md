@@ -4,16 +4,26 @@ Anotator is a Django project for organizing annotation batches of language-model
 
 ## License
 
-This project is licensed under **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**. The full legal text is in [LICENSE.md](LICENSE.md); the summary below is for convenience only and is not a substitute for the license itself.
+This project is licensed under the **Licença Pública Acadêmica e de Avaliação (LPAA)**, a custom license (not open source) created to support academic, scientific, and evaluation use while protecting the copyright holder's commercial rights. The full legal text is in [LICENSE.md](LICENSE.md); the summary below is for convenience only and is not a substitute for the license itself.
 
-Under this license you are free to **share** (copy and redistribute the material) and **adapt** (remix, transform, and build upon the material), as long as you follow these terms:
+**This is not an open-source license for general use.** The rights granted are strictly limited to the purposes below.
 
-- **Attribution** — You must give appropriate credit to the original author(s), provide a link to the license, and indicate if changes were made.
-- **NonCommercial** — You may **not** use the material for commercial purposes, i.e., not primarily intended for or directed towards commercial advantage or monetary compensation.
-- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the **same license** as the original (CC BY-NC-SA 4.0 or a compatible one).
-- **No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+You are permitted, free of charge, to download, run, modify, and study the software for:
 
-There are no warranties given: the material is provided "as-is", and the licensor disclaims liability for any damages arising from its use. This does not affect any rights you may have under fair use, fair dealing, or applicable exceptions and limitations to copyright.
+- **Educational use** — classes, courses, and academic work at any level (undergraduate, graduate, or technical), regardless of the user's institution.
+- **Scientific research** — experiments, proofs of concept, academic validation, and data generation for scientific publications, as long as conducted without commercial or for-profit purposes.
+- **Evaluation** — testing the software in a controlled/sandbox environment, for a limited time, solely to assess whether it meets internal requirements before negotiating a commercial license.
+
+The following uses are **expressly prohibited**:
+
+- **Commercial use** of any kind, direct or indirect.
+- **Production use** — deploying the software to run real operations, administrative routines, or services within any organization.
+- **Corporate R&D** — using the software as a basis for proprietary commercial products.
+- **Distribution** — distributing, sublicensing, selling, or renting the software (or modified versions of it) to third parties.
+
+Anyone wishing to use the software for a purpose listed above as prohibited (e.g., production or commercial use) must negotiate a separate technology licensing agreement with the institution's Núcleo de Inovação Tecnológica (NIT).
+
+All copyright, patents, trademarks, and other intellectual property rights over the software belong exclusively to the institution. The software is provided "as-is", with no warranties, and the institution/authors are not liable for any claims or damages arising from its use.
 
 ## Repository Structure
 
